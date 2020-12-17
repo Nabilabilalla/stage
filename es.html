@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gallery.css">
+    <title>gallery</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <ul class="menu">
+                <li class="current">
+                    <div class="img" 
+                         style="background-image: url(image/20180108_152104.jpg)">
+                    </div>
+                    <span>L</span>
+                </li>
+                <li>
+                    <div class="img" 
+                        style="background-image: url('image/IMG-20191204-WA0025.jpg')">
+                    </div>
+                    <span>U</span>
+                </li>
+                <li>
+                    <div class="img" 
+                        style="background-image: url('image/IMG-20191205-WA0010.jpg')" >
+                    </div>
+                    <span>N</span>
+                </li>
+                <li>
+                    <div class="img" 
+                        style="background-image: url('image/IMG-20191204-WA0027.jpg')" >
+                    </div>
+                    <span>E</span>
+                </li>
+                <li>
+                    <div class="img" 
+                        style="background-image: url('image/20190118_093815.jpg')" >
+                    </div>
+                    <span>C</span>
+                </li>
+            </ul>
+        </nav>
+        <div class="gallery">
+            <article class="current-gallery"></article>
+        </div>
+        <div class="detail"></div>
+    </div>
+</body>
+</html>
+<script>
+    const L = [
+    'image/20171228_160223.jpg',
+    'image/20171230_141720.jpg',
+    'image/20171230_141751.jpg',
+    'image/20180108_131407.jpg',
+    'image/20180108_152104.jpg',
+    'image/IMG-20190928-WA0006.jpg',
+    'image/20180122_162240.jpg',
+    'image/20180312_093932.jpg',
+    'image/20200331_134910.jpg',
+    'image/20180504_163955.jpg',
+]
+
+const U = [
+'image/IMG-20191204-WA0025.jpg',
+    'image/IMG-20191204-WA0014.jpg',
+    'image/20180206_115458.jpg',
+    'image/IMG-20191204-WA0020.jpg',
+    'image/20180530_125318.jpg', 
+]
+
+const N = [
+'image/p.jpg',
+    'image/IMG-20191204-WA0031.jpg',
+    'image/20180425_172541.jpg',
+    'image/U.jpg',
+    'image/IMG-20191205-WA0010.jpg',
+    'image/wf.jpg'
+]
+
+const E = [
+'image/IMG-20191204-WA0027.jpg',
+    'image/rr.jpg',
+    'image/s.jpg',
+    'image/t.jpg',
+    'image/IMG-20191204-WA0019.jpg',
+    'image/U.jpeg',
+]
+const C = [
+    'image/Z.jpg',
+    'image/jjj.jpeg',
+    'image/20190118_093815.jpg',
+    'image/IMG-20190525-WA0017.jpg',
+]
+const GALLERY_LIST = [
+    L,
+    U,
+    N,
+    E,
+    C
+]
+
+let currentInx = 0
+
+window.onload = () => {
+    document.querySelectorAll('li').forEach((element, inx) => {
+        element.onclick = (event) => changeGallery(event, inx)
+    })
+
+    document.querySelector('.detail').onclick = (event) => {
+        document.querySelector('.detail').innerHTML = ''
+        event.currentTarget.classList.remove('show')
+    }
+        
+    loadGallery(currentInx)
+}
+
+const changeGallery = (event, inx) => {
+    if (event.currentTarget.className === 'current') {
+        return
+    }
+    currentInx = inx
+    document.querySelector('.current').classList.remove('current')
+    event.currentTarget.classList.add('current')
+    loadGallery(currentInx)
+}
+
+const loadGallery = (currentInx) => {
+    document.querySelector('.current-gallery').innerHTML = ''
+    document.querySelector('.current-gallery').classList.add('small')
+    window.setTimeout(() => {
+        document.querySelector('.current-gallery').classList.remove('small')  
+    }, 800)
+
+    GALLERY_LIST[currentInx].forEach(url => {
+        const div = document.createElement('div')
+        div.innerHTML = `<img src=${ url } />`
+        document.querySelector('.current-gallery').appendChild(div)
+    })
+
+    document.querySelectorAll('.current-gallery div').forEach(element =>
+        element.onclick = (event) => showImage(event.currentTarget)
+    )
+}
+
+const showImage = (div) => {
+    const dialog = document.querySelector('.detail')
+    dialog.appendChild(div.cloneNode(true))
+    dialog.classList.add('show')
+}
+</script>
+ 

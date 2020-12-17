@@ -1,0 +1,134 @@
+
+
+/******************************************************/
+@import url("https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap");
+
+body {
+  margin: 0;
+  background:  #e9e9e9;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Zhi Mang Xing", cursive;
+
+  --container-width: 1000px;
+  --container-height: 700px;
+  --menu-size: 100px;
+}
+
+.container {
+  width: var(--container-width);
+  height: var(--container-height);
+  background:  #e9e9e9;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 1em;
+}
+
+.menu {
+  list-style: none;
+  padding: 1em;
+}
+
+.menu li {
+  margin-bottom: 1em;
+  border: 4px #aaa solid;
+  width: var(--menu-size);
+  transition: all 0.5s linear;
+}
+
+.menu span {
+  display: none;
+}
+
+.menu .img {
+  background-position-x: 50%;
+  background-position-y: calc(50%);
+  background-size: auto var(--menu-size);
+  background-repeat: no-repeat;
+  height: var(--menu-size);
+  width: var(--menu-size);
+  cursor: pointer;
+}
+
+.menu li:hover {
+  border-color: #fff;
+}
+
+li.current {
+  border-color: #fff;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 80% 100%, 0% 100%);
+  position: relative;
+}
+
+.current span {
+  display: inline;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  font-size: 1.5em;
+}
+
+.current-gallery {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+  align-content: center;
+  align-items: stretch;
+  justify-content: center;
+  height: var(--container-height);
+  background: #e9e9e9;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.current-gallery.small {
+  transform: scale(0) rotateY(360deg);
+}
+
+.current-gallery div {
+  width: calc(70% / 2.2);
+  margin: 5px;
+}
+
+.current-gallery img {
+  box-sizing: border-box;
+  border-width: 0;
+  transition: 0.3s all linear;
+}
+
+.current-gallery img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+.detail {
+  transition: 0.7s linear all;
+  width: 0;
+  height: 0;
+}
+
+.detail.show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #59514f99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.detail.show img {
+  max-height: 80vh;
+  max-width: 80vw;
+}
+
+.current-gallery img:hover {
+  outline: 5px solid #4d413d;
+}
